@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bike Transport Service</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #C8102E;
+      --orange: #F4811F;
+      --gold:   #F5C518;
+      --dark:   #1A1208;
+      --cream:  #FDF6EC;
+      --text:   #3A2A10;
+      --light:  #FFF8F0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--dark);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 72px;
+      box-shadow: 0 2px 20px rgba(0,0,0,.4);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--orange), var(--red));
+      border-radius: 10px;
+      display: grid; place-items: center;
+      font-size: 22px;
+    }
+    .logo-text {
+      line-height: 1.1;
+    }
+    .logo-text strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: #fff;
+    }
+    .logo-text span {
+      font-size: .72rem;
+      color: var(--gold);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    nav a {
+      color: #ccc; text-decoration: none; margin-left: 28px;
+      font-size: .9rem; font-weight: 500;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--gold); }
+    .cta-call {
+      margin-left: 32px;
+      background: linear-gradient(135deg, var(--orange), var(--red));
+      color: #fff; text-decoration: none;
+      padding: 9px 20px; border-radius: 30px;
+      font-weight: 600; font-size: .88rem;
+      white-space: nowrap;
+      transition: opacity .2s, transform .15s;
+    }
+    .cta-call:hover { opacity: .88; transform: scale(1.04); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      background: var(--dark);
+      position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+      padding: 80px 5vw 60px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 50%, rgba(244,129,31,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 20% 80%, rgba(200,16,46,.15) 0%, transparent 60%);
+    }
+    /* big decorative truck silhouette */
+    .hero-truck {
+      position: absolute; right: -20px; bottom: 0;
+      width: min(620px, 55vw);
+      opacity: .07;
+      font-size: min(520px, 48vw);
+      line-height: 1;
+      user-select: none;
+    }
+    .hero-content { position: relative; max-width: 620px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(245,197,24,.15);
+      border: 1px solid rgba(245,197,24,.35);
+      color: var(--gold);
+      font-size: .78rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 24px;
+      animation: fadeUp .6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 20px;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--orange), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.08rem; color: #bbb; line-height: 1.7;
+      margin-bottom: 36px;
+      animation: fadeUp .7s .2s ease both;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      animation: fadeUp .7s .3s ease both;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--orange), var(--red));
+      color: #fff; text-decoration: none;
+      padding: 14px 32px; border-radius: 40px;
+      font-weight: 700; font-size: 1rem;
+      box-shadow: 0 8px 24px rgba(244,129,31,.35);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(244,129,31,.45); }
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,.25);
+      color: #ddd; text-decoration: none;
+      padding: 13px 28px; border-radius: 40px;
+      font-weight: 500; font-size: 1rem;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 56px;
+      animation: fadeUp .7s .4s ease both;
+    }
+    .stat strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; color: var(--gold);
+    }
+    .stat span { font-size: .82rem; color: #888; }
+
+    /* ── SERVICES ── */
+    .section { padding: 90px 5vw; }
+    .section-tag {
+      font-size: .75rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.2; color: var(--dark);
+      margin-bottom: 48px;
+    }
+    .section-title span {
+      background: linear-gradient(90deg, var(--orange), var(--red));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--light);
+      border: 1px solid rgba(200,16,46,.1);
+      border-radius: 18px;
+      padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--red));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.1); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-icon { font-size: 2.4rem; margin-bottom: 16px; }
+    .service-card h3 { font-family: 'Playfair Display', serif; font-size: 1.18rem; margin-bottom: 10px; color: var(--dark); }
+    .service-card p { font-size: .9rem; color: #6b5c40; line-height: 1.6; }
+
+    /* ── WHY US ── */
+    .why-section {
+      background: var(--dark);
+      padding: 90px 5vw;
+    }
+    .why-section .section-tag { color: var(--gold); }
+    .why-section .section-title { color: #fff; }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 28px;
+    }
+    .why-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: background .2s;
+    }
+    .why-card:hover { background: rgba(244,129,31,.1); }
+    .why-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem; color: var(--orange);
+      font-weight: 900; line-height: 1;
+      margin-bottom: 12px;
+    }
+    .why-card h4 { color: #fff; font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .why-card p { color: #999; font-size: .87rem; line-height: 1.6; }
+
+    /* ── PROCESS ── */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute; top: 32px; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange), var(--red));
+    }
+    .step { text-align: center; padding: 0 12px; position: relative; }
+    .step-num {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, var(--orange), var(--red));
+      color: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 900;
+      margin: 0 auto 20px;
+      position: relative; z-index: 1;
+      box-shadow: 0 6px 20px rgba(244,129,31,.4);
+    }
+    .step h4 { font-weight: 700; margin-bottom: 8px; color: var(--dark); }
+    .step p { font-size: .85rem; color: #7a6640; line-height: 1.5; }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: linear-gradient(135deg, var(--red) 0%, #8B0000 100%);
+      padding: 90px 5vw;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .contact-section::before {
+      content: '📦';
+      position: absolute; font-size: 300px;
+      right: -60px; top: -60px;
+      opacity: .06;
+      user-select: none;
+    }
+    .contact-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: #fff; margin-bottom: 14px;
+    }
+    .contact-section p { color: rgba(255,255,255,.75); font-size: 1.05rem; margin-bottom: 40px; }
+    .contact-phone {
+      display: inline-flex; align-items: center; gap: 14px;
+      background: #fff;
+      color: var(--red);
+      text-decoration: none;
+      padding: 18px 44px; border-radius: 50px;
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: .04em;
+      box-shadow: 0 12px 40px rgba(0,0,0,.25);
+      transition: transform .2s, box-shadow .2s;
+      margin-bottom: 24px;
+    }
+    .contact-phone:hover { transform: scale(1.04); box-shadow: 0 16px 50px rgba(0,0,0,.35); }
+    .contact-info {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 32px;
+      margin-top: 40px;
+    }
+    .info-item { color: rgba(255,255,255,.85); font-size: .92rem; display: flex; align-items: center; gap: 8px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0e0b05;
+      padding: 32px 5vw;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 16px;
+    }
+    footer p { color: #555; font-size: .84rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width: 640px) {
+      nav { display: none; }
+      .hero-stats { gap: 24px; }
+      .process-steps::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">
+    <div class="logo-icon">🚛</div>
+    <div class="logo-text">
+      <strong>Bike Transport Service</strong>
+      <span>Packers &amp; Movers</span>
+    </div>
+  </a>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#why">Why Us</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a href="tel:8053925663" class="cta-call">📞 Call Now</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-truck">🚛</div>
+  <div class="hero-content">
+    <div class="hero-badge">✅ Trusted Since Years · Pan India Service</div>
+    <h1>Move Smarter,<br/>Move with <em>Bike Transport Service</em></h1>
+    <p>Professional, safe &amp; affordable packing and moving services for homes, offices, and vehicles — anywhere across India.</p>
+    <div class="hero-actions">
+      <a href="tel:8053925663" class="btn-primary">📞 8053925663 – Get Free Quote</a>
+      <a href="#services" class="btn-ghost">Explore Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>5000+</strong><span>Happy Clients</span></div>
+      <div class="stat"><strong>100%</strong><span>Safe Delivery</span></div>
+      <div class="stat"><strong>Pan India</strong><span>Coverage</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-tag">What We Offer</div>
+  <div class="section-title">Our <span>Services</span></div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Home Shifting</h3>
+      <p>Complete household relocation with expert packing, loading, transport, and unpacking at your new home.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏢</div>
+      <h3>Office Relocation</h3>
+      <p>Minimal downtime office moves — we handle furniture, IT equipment, and files with utmost care.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚗</div>
+      <h3>Vehicle Transport</h3>
+      <p>Car &amp; bike transport via enclosed carriers. GPS tracked, fully insured, door-to-door delivery.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📦</div>
+      <h3>Packing Services</h3>
+      <p>Quality packing materials — bubble wrap, corrugated boxes, stretch film — for maximum protection.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏗️</div>
+      <h3>Warehousing</h3>
+      <p>Short &amp; long-term secure storage solutions at our well-maintained, CCTV-monitored facilities.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌏</div>
+      <h3>International Moving</h3>
+      <p>Customs clearance, sea &amp; air freight, and door-to-port global relocation assistance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section" id="why">
+  <div class="section-tag">Why Choose Us</div>
+  <div class="section-title">Reasons to <span style="background:linear-gradient(90deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Trust Us</span></div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <h4>Experienced Team</h4>
+      <p>Our trained professionals handle every item with military-grade care and precision.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <h4>Affordable Pricing</h4>
+      <p>Transparent, no-hidden-cost quotes tailored to your budget and requirements.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <h4>GPS Tracked Trucks</h4>
+      <p>Real-time location tracking so you always know exactly where your belongings are.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">04</div>
+      <h4>Insurance Coverage</h4>
+      <p>Comprehensive transit insurance ensures your goods are protected against any damage.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">05</div>
+      <h4>24×7 Support</h4>
+      <p>Round-the-clock customer support via call and WhatsApp — we're always reachable.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">06</div>
+      <h4>On-Time Delivery</h4>
+      <p>We commit to delivery timelines and honour them — your schedule is our priority.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <div class="section-tag">How It Works</div>
+  <div class="section-title">Our Simple <span>4-Step Process</span></div>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Book a Call</h4>
+      <p>Call us or request a callback. Share your move details with our consultant.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Get a Quote</h4>
+      <p>Receive a free, transparent estimate with no surprise charges.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>We Pack &amp; Move</h4>
+      <p>Our crew arrives on time, packs everything professionally, and loads securely.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Safe Delivery</h4>
+      <p>Your belongings arrive safely and we help set them up at the destination.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <h2>Ready to Move? Let's Talk!</h2>
+  <p>Call us right now for a free consultation and instant quote. Available 24×7.</p>
+  <a href="tel:8053925663" class="contact-phone">📞 8053925663</a>
+  <div class="contact-info">
+    <div class="info-item">🕐 Available 24 × 7</div>
+    <div class="info-item">🇮🇳 Pan India Service</div>
+    <div class="info-item">✅ Licensed &amp; Insured</div>
+    <div class="info-item">💬 WhatsApp Support</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <strong style="color:#fff">Bike Transport Service &amp; Movers</strong>. All rights reserved.</p>
+  <p>📞 <a href="tel:8053925663">8053925663</a> &nbsp;|&nbsp; Trusted Relocation Experts</p>
+</footer>
+
+</body>
+</html>
