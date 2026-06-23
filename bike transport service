@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Transport Service - Delhi NCR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #1a73e8; /* Placeholder for your primary brand color */
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header p {
+            margin: 0.5em 0;
+            font-size: 1.1em;
+        }
+        .container {
+            width: 90%;
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        section {
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #1a73e8; /* Placeholder for your primary brand color */
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .contact-info p, .address p {
+            margin: 5px 0;
+        }
+        .service-areas ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .service-areas li {
+            background-color: #e9e9e9;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #1a73e8; /* Placeholder for your primary brand color */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Business name Bike Transport Service</h1>
+        <p>Reliable and Affordable Bike Transportation Across India</p>
+    </header>
+
+    <div class="container">
+        <section class="contact-info">
+            <h2>Contact Us</h2>
+            <p><span class="highlight">Phone:</span> <a href="tel:+918053925663">+91 8053925663</a></p>
+            <p><span class="highlight">WhatsApp:</span> <a href="https://wa.me/918053925663" target="_blank">+91 8053925663</a></p>
+            <!-- <p><span class="highlight">Email:</span> your_email@example.com</p> -->
+            <p><span class="highlight">Location:</span> Delhi, India</p>
+        </section>
+
+        <section class="service-areas">
+            <h2>Our Service Areas (Local)</h2>
+            <ul>
+                <li>Delhi</li>
+                <li>Noida</li>
+                <li>Greater Noida</li>
+                <li>Ghaziabad</li>
+            </ul>
+        </section>
+
+        <section class="address">
+            <h2>Business Address</h2>
+            <p>
+                Shop No. 17, Joshi Path, Block 16,<br>
+                Karol Bagh, New Delhi, Delhi, 110005
+            </p>
+        </section>
+
+        <section class="pricing">
+            <h2>Inter-State Bike Transport Pricing</h2>
+            <p>Below are estimated prices for transporting your bike/scooter from Delhi NCR to various states. *Prices may vary based on bike model, specific destination, and additional services (e.g., insurance, door-to-door delivery).* Please contact us for a precise quote.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Origin</th>
+                        <th>Destination State</th>
+                        <th>Estimated Bike Price</th>
+                        <th>Estimated Scooter Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Delhi / Noida / Greater Noida / Ghaziabad</td>
+                        <td>Uttar Pradesh</td>
+                        <td>*[PRICE HERE]*</td>
+                        <td>*[PRICE HERE]*</td>
+                    </tr>
+                    <tr>
+                        <td>Delhi / Noida / Greater Noida / Ghaziabad</td>
+                        <td>Haryana</td>
+                        <td>*[PRICE HERE]*</td>
+                        <td>*[PRICE HERE]*</td>
+                    </tr>
+                    <tr>
+                        <td>Delhi / Noida / Greater Noida / Ghaziabad</td>
+                        <td>Punjab</td>
+                        <td>*[PRICE HERE]*</td>
+                        <td>*[PRICE HERE]*</td>
+                    </tr>
+                    <tr>
+                        <td>Delhi / Noida / Greater Noida / Ghaziabad</td>
+                        <td>Rajasthan</td>
+                        <td>*[PRICE HERE]*</td>
+                        <td>*[PRICE HERE]*</td>
+                    </tr>
+                     <tr>
+                        <td>Delhi / Noida / Greater Noida / Ghaziabad</td>
+                        <td>Maharashtra</td>
+                        <td>*[PRICE HERE]*</td>
+                        <td>*[PRICE HERE]*</td>
+                    </tr>
+                     <tr>
+                        <td>Delhi / Noida / Greater Noida / Ghaziabad</td>
+                        <td>Karnataka</td>
+                        <td>*[PRICE HERE]*</td>
+                        <td>*[PRICE HERE]*</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">For other states, please <a href="tel:+918053925663">call us</a> or <a href="https://wa.me/918053925663" target="_blank">WhatsApp us</a> for a custom quote!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+</html>
